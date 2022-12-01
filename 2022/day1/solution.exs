@@ -21,7 +21,11 @@ defmodule Solution do
       |> Stream.chunk_by(&(&1 == -1))
       |> Stream.map(&sum(&1))
 
-    Enum.max(stream)
+    {ans, _} =
+      Enum.sort(stream, :desc)
+      |> Enum.split(3)
+
+    {Enum.at(ans, 0), sum(ans)}
   end
 
   def solve(input_file) do
